@@ -86,3 +86,25 @@ button[type="submit"] {
   border-radius: 8px;
 
 }
+
+.random {
+  background-color: white;
+  padding-top: 100px;
+}
+
+.random_container {
+  width: 85%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.random_img {
+  max-width: 100%;
+  object-fit: cover;
+  height: 440px;
+  aspect-ratio: 4/3;
+  border-radius: 8px;
+
+}

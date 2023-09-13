@@ -25,6 +25,8 @@
     </div>
     <!-- end of search -->
 
+    <RandomImg />
+
     <div class="results">
       <div class="results_container">
         <div v-for="image in images" :key="image.id">
@@ -37,8 +39,13 @@
 
 <script>
 import axios from 'axios'
+import RandomImg from './RandomImg.vue'
 
 export default {
+  components: {
+    RandomImg
+  },
+  computed: {},
   data() {
     return {
       searchQuery: '',

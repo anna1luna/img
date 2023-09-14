@@ -25,15 +25,14 @@
     </div>
     <!-- end of search -->
 
-    <RandomImg />
-
     <div class="results">
-      <div class="results_container">
+      <div class="results_container" ref="myDiv">
         <div v-for="image in images" :key="image.id">
           <img class="results_img" :src="image.urls.small" alt="Image" />
         </div>
       </div>
     </div>
+    <RandomImg></RandomImg>
   </div>
 </template>
 
@@ -45,7 +44,13 @@ export default {
   components: {
     RandomImg
   },
-  computed: {},
+  computed: {
+    imageCount() {
+      const myDiv = this.$refs.myDiv // Reference to your first div element
+      const images = myDiv.querySelectorAll('img') // Select all img elements within the first div
+      return images.length // Return the length of images
+    }
+  },
   data() {
     return {
       searchQuery: '',

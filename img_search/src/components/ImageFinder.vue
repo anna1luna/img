@@ -24,39 +24,41 @@
       </form>
     </div>
     <!-- end of search -->
-
+    <RandomImg v-if="!imagesLoaded"></RandomImg>
     <div class="results">
-      <div class="results_container" ref="myDiv">
+      <div class="results_container">
         <div v-for="image in images" :key="image.id">
-          <img class="results_img" :src="image.urls.small" alt="Image" />
+          <img
+            class="results_img"
+            :src="image.urls.small"
+            alt="Image"
+            @click="navigateToImagePage"
+          />
         </div>
       </div>
     </div>
-    <RandomImg></RandomImg>
+    <button @click="scrollToTop" class="scroll-to-top">
+      <img src="/src/assets/img/arrow.svg" alt="arrow" />
+    </button>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import RandomImg from './RandomImg.vue'
-
 export default {
   components: {
     RandomImg
   },
-  computed: {
-    imageCount() {
-      const myDiv = this.$refs.myDiv // Reference to your first div element
-      const images = myDiv.querySelectorAll('img') // Select all img elements within the first div
-      return images.length // Return the length of images
-    }
-  },
+
   data() {
     return {
       searchQuery: '',
-      images: []
+      images: [],
+      imagesLoaded: false
     }
   },
+
   methods: {
     async searchImages() {
       try {
@@ -69,9 +71,22 @@ export default {
           }
         })
         this.images = response.data.results
+        this.imagesLoaded = true
+        this.$emit('images-loaded', true)
       } catch (error) {
         console.error(error)
       }
+    },
+    scrollToTop() {
+      // Scroll to the top of the page
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Optional: Add smooth scrolling behavior
+      })
+    },
+    navigateToImagePage() {
+      // Navigate to the image page using Vue Router
+      this.$router.push({ name: 'ImageView', params: { id: this.imageId } })
     }
   }
 }

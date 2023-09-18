@@ -1,5 +1,6 @@
 <template>
   <div class="random">
+    <h1 class="random_header">Для вашего вдохновения</h1>
     <div class="random_container">
       <div v-for="image in images" :key="image.id">
         <img class="random_img" :src="image.urls.regular" :alt="image.description" />
@@ -28,7 +29,7 @@ export default {
             Authorization: `Client-ID Mch8FeMjAilWxlPiILbzIZWH5hWWW_Umv8NmvjyyOck`
           },
           params: {
-            count: 8 // Number of random images to fetch
+            count: 9 // Number of random images to fetch
           }
         })
         this.images = response.data

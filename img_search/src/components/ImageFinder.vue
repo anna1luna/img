@@ -3,10 +3,6 @@
     <header class="header">
       <div class="header_container">
         <img src="/src/assets/img/sflogo.png" alt="San_Francisco_Art" class="header_logo" />
-        <a class="header_fav" href="#">
-          <img src="/src/assets/img/fav.svg" alt="favorites" />
-          Избранное
-        </a>
       </div>
     </header>
     <!-- end of header -->
@@ -55,7 +51,9 @@ export default {
     return {
       searchQuery: '',
       images: [],
-      imagesLoaded: false
+      imagesLoaded: false,
+      currentPage: 1,
+      perPage: 30
     }
   },
 
@@ -67,7 +65,9 @@ export default {
             Authorization: `Client-ID Mch8FeMjAilWxlPiILbzIZWH5hWWW_Umv8NmvjyyOck`
           },
           params: {
-            query: this.searchQuery
+            query: this.searchQuery,
+            page: this.currentPage,
+            per_page: this.perPage
           }
         })
         this.images = response.data.results
